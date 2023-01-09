@@ -27,7 +27,22 @@
     <ol class="tweeks">
       <%= for tweek <- @tweeks do %>
         <li class="tweek">
-          <%= tweek.content %> - <%= tweek.inserted_at %>
+          <div class="user-avatar">
+            <%= img_tag(Routes.static_path(@socket, "/images/default_avatar.png"), height: 40, width: 40, alt: "Avatar") %>
+          </div>
+          <span class="metadata">
+            <span class="username">
+              <%= link "@#{tweek.user.username}", to: Routes.user_path(@socket, TwittexWeb.UserLive, tweek.user.username) %>
+            </span>
+            •
+            <%= Timex.from_now(tweek.inserted_at) %>
+          </span>
+
+          <span class="metadata">
+          </span>
+          <span class="content">
+            <%= tweek.content %>
+          </span>
         </li>
       <% end %>
     </ol>

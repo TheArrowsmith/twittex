@@ -40,3 +40,39 @@ body {
   color: #555;
   font-size: 0.9em;
 }
+
+.tweeks {
+  list-style: none;
+  padding: 0;
+}
+
+.tweeks li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  padding: 10px 10px 20px;
+}
+
+.tweeks .user-avatar {
+  float: left;
+  margin-right: 12px;
+  margin-top: 5px;
+}
+
+.tweeks .content {
+  display: block;
+}
+
+.tweeks .metadata {
+  color: #555;
+  display: block;
+}
+
+.tweeks .metadata .username a {
+  color: #555;
+  text-decoration: none;
+}
+
+.tweeks .metadata .username a:hover {
+  color: #222;
+  text-decoration: underline;
+}
