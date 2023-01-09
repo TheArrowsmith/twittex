@@ -1,0 +1,42 @@
+body {
+  padding-top: 50px;
+}
+
+.sidebar {
+  display: inline-block;
+  width: 20%;
+}
+
+.sidebar-user-menu {
+  list-style: none;
+  text-align: right;
+}
+
+.main {
+  display: inline-block;
+  margin-left: 30px;
+  vertical-align: top;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.user-header-avatar {
+  float: left;
+  padding-right: 20px;
+}
+
+.user-header-profile {
+  float: left;
+}
+
+.user-header-profile .username {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.user-header-profile .stats {
+  color: #555;
+  font-size: 0.9em;
+}

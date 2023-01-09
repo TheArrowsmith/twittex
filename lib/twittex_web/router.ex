@@ -21,6 +21,7 @@ defmodule TwittexWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    live "/:username", UserLive, as: :user
   end
 
   # Other scopes may use custom stacks.

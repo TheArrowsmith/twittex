@@ -10,22 +10,21 @@
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav>
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-          <%= render "_user_menu.html", assigns %>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
-    <%= @inner_content %>
+    <div class="sidebar">
+      <ul class="sidebar-user-menu">
+        <%= if @current_user do %>
+          <li><b><%= @current_user.username %></b></li>
+          <li><%= link "My profile", to: Routes.user_path(@conn, TwittexWeb.UserLive, @current_user.username) %></li>
+          <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
+          <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+        <% else %>
+          <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+          <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="main">
+      <%= @inner_content %>
+    </div>
   </body>
 </html>

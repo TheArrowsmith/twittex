@@ -74,6 +74,7 @@ defmodule TwittexWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import Phoenix.Component
     end
   end
 
@@ -98,6 +99,7 @@ defmodule TwittexWeb do
       import TwittexWeb.ErrorHelpers
       import TwittexWeb.Gettext
       alias TwittexWeb.Router.Helpers, as: Routes
+      import Phoenix.Component
     end
   end
 
