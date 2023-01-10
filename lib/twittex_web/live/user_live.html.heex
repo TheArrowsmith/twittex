@@ -1,3 +1,12 @@
+<%= if @user == @current_user do %>
+  <.form let={f} for={@changeset} phx-submit="save">
+    <%= textarea f, :content, placeholder: "Compose new tweek...", phx_debounce: 1000 %>
+    <%= error_tag f, :content %>
+
+    <%= submit "Submit", phx_disable_with: "Saving..." %>
+  </.form>
+<% end %>
+
 <div class="user-header">
   <div class="user-header-avatar">
     <%= img_tag(Routes.static_path(@socket, "/images/default_avatar.png"), height: 80, width: 80, alt: "Avatar") %>
