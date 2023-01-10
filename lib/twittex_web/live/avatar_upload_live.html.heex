@@ -1,0 +1,17 @@
+<form id="avatar-form" phx-submit="save" phx-change="validate">
+  <%= for entry <- @uploads.avatar.entries do %>
+    <figure>
+      <.live_img_preview entry={entry} />
+      <figcaption><%= entry.client_name %></figcaption>
+    </figure>
+
+    <%= for err <- upload_errors(@uploads.avatar, entry) do %>
+      <div class="alert alert-danger">
+        <%= error_to_string(err) %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <.live_file_input upload={@uploads.avatar} />
+  <button type="submit">Upload</button>
+</form>

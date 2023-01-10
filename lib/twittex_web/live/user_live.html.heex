@@ -9,7 +9,7 @@
 
 <div class="user-header">
   <div class="user-header-avatar">
-    <%= img_tag(Routes.static_path(@socket, "/images/default_avatar.png"), height: 80, width: 80, alt: "Avatar") %>
+    <%= img_tag(Routes.static_path(@socket, avatar_path(@user)), height: 80, width: 80, alt: "Avatar") %>
   </div>
 
   <div class="user-header-profile">
@@ -37,7 +37,7 @@
       <%= for tweek <- @tweeks do %>
         <li class="tweek">
           <div class="user-avatar">
-            <%= img_tag(Routes.static_path(@socket, "/images/default_avatar.png"), height: 40, width: 40, alt: "Avatar") %>
+            <%= img_tag(Routes.static_path(@socket, avatar_path(@user)), height: 40, width: 40, alt: "Avatar") %>
           </div>
           <span class="metadata">
             <span class="username">

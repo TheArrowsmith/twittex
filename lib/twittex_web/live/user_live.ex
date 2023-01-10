@@ -4,6 +4,7 @@ defmodule TwittexWeb.UserLive do
   alias Twittex.Accounts
   alias Twittex.Feed
   alias Twittex.Feed.Tweek
+  import TwittexWeb.AvatarHelper
 
   on_mount {TwittexWeb.LiveAuth, :fetch_current_user}
 
@@ -27,4 +28,5 @@ defmodule TwittexWeb.UserLive do
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
+  
 end

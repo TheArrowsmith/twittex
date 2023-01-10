@@ -51,3 +51,7 @@
     <%= submit "Change password" %>
   </div>
 </.form>
+
+<h3>Change avatar</h3>
+
+<%= live_render @conn, TwittexWeb.AvatarUploadLive %>
