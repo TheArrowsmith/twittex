@@ -16,4 +16,16 @@ defmodule TwittexWeb.ProfileLive do
 
     {:ok, assign(socket, form: form, tweeks: tweeks, user: user)}
   end
+
+  def handle_event("save", %{"tweek" => tweek_params}, socket) do
+    current_user = socket.assigns.current_user
+
+    case Feed.create_tweek_for_user(current_user, tweek_params) do
+      {:ok, tweek} ->
+        {:noreply, update(socket, :tweeks, & [tweek | &1])}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, form: to_form(changeset))}
+    end
+  end
 end
