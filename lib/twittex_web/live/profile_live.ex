@@ -7,6 +7,7 @@ defmodule TwittexWeb.ProfileLive do
 
   on_mount {TwittexWeb.UserAuth, :mount_current_user}
 
+  import TwittexWeb.AvatarHelper
   import TwittexWeb.FeedComponents
 
   def mount(%{"username" => username}, _session, socket) do
