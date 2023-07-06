@@ -14,8 +14,17 @@ defmodule TwittexWeb.ProfileLive do
     user = Accounts.get_user_by_username!(username)
     tweeks = Feed.list_tweeks_for_user(user)
     form = Feed.change_tweek(%Tweek{}) |> to_form
+    followed? =
+      socket.assigns.current_user &&
+        Feed.follows?(socket.assigns.current_user, user)
 
-    {:ok, assign(socket, form: form, tweeks: tweeks, user: user)}
+    socket =
+      socket
+      |> assign(:user, user)
+      |> assign(:followed?, followed?)
+      |> assign(:tweeks, tweeks)
+      |> assign(:form, form)
+    {:ok, socket}
   end
 
   def handle_event("save", %{"tweek" => tweek_params}, socket) do
@@ -28,5 +37,33 @@ defmodule TwittexWeb.ProfileLive do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+  
+  def handle_event("follow", %{"user-id" => user_id}, socket) do
+    Feed.follow!(socket.assigns.current_user.id, user_id)
+    {:noreply, assign(socket, :followed?, true)}
+  end
+
+  def handle_event("unfollow", %{"user-id" => user_id}, socket) do
+    Feed.unfollow!(socket.assigns.current_user.id, user_id)
+    {:noreply, assign(socket, :followed?, false)}
+  end
+
+  def is_my_profile?(%{current_user: current_user, user: user} = _assigns) do
+    current_user && current_user.id == user.id
+  end
+
+  attr :followed?, :boolean
+  attr :user_id, :integer
+  def follow_button(assigns) do
+    ~H"""
+    <button
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      phx-click={if @followed?, do: "unfollow", else: "follow"}
+      phx-value-user-id={@user_id}
+    >
+      <%= if @followed?, do: "Unfollow", else: "Follow" %>
+    </button>
+    """
   end
 end
